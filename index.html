@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<script src="https://unpkg.com/@tensorflow/tfjs"></script>
+<script src="https://unpkg.com/@tensorflow/tfjs-automl"></script>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Document</title>
+        <script defer src="script.js"></script> 
+    </head>
+    <style>
+        body {
+          margin: 0;
+          padding: 0;
+          width: 100vw;
+          height: 100vh;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+        canvas {
+             position: absolute;
+        }
+    </style>
+    <body>
+        <canvas id="myCanvas"></canvas>
+        <img id="salad" crossorigin="anonymous" src="https://storage.googleapis.com/tfjs-testing/tfjs-automl/object_detection/test_image.jpg">
+    </body>
+</html>
