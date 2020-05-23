@@ -1,45 +1,39 @@
 const image = document.getElementById('salad')
-//const canvas = document.getElementById("myCanvas");
-
-
+const canvas = document.getElementById('canvas')
+const outp = document.getElementById('output')
+const context = canvas.getContext('2d')
+context.drawImage(image,0,0)
 async function run() {
+    
     const model = await tf.automl.loadObjectDetection('model.json');
-    const img = document.getElementById('salad');
+    const image = document.getElementById('salad');
     const options = {score: 0.5, iou: 0.5, topk: 20};
-    const predictions = await model.detect(img, options);
+    const predictions = await model.detect(image, options);
     console.log(predictions);
     // Show the resulting object on the page.
+    for(var i = 0; i<predictions.length; i++){
+        bbox = [
+            predictions[i].box.left,
+            predictions[i].box.top,
+            predictions[i].box.width,
+            predictions[i].box.height
+        ]
+        outp.innerHTML += "<br/>" + predictions[i].label + " : Score = " + predictions[i].score + " : box = " + bbox;
+        context.beginPath();
+        context.rect(bbox[0], bbox[1], bbox[2], bbox[3]);
+        context.lineWidth = 3;
+        context.strokeStyle = 'red';
+        context.stroke();
+        context.fillStyle = "red";
+        context.fillText(predictions[i].label, bbox[0]+4, bbox[1]+12);
+    }
+    /////
     const pre = document.createElement('pre');
     pre.textContent = JSON.stringify(predictions, null, 2);
     document.body.append(pre);
+    
 
 }
-function imgs(){
-    const container = document.createElement('div')
-    container.style.position = 'relative'
-    document.body.append(container)
-    document.body.append('imagss')
-    image.addEventListener('change',async ()=> {
-        const imad = await model.bufferToImage('salad')
-        container.append(imad)
-        const canvas = model.createCanvasFromMedia(imad)
-        container.append(canvas)
-        const displaySize = { width: imad.width, hight: imad.hight }
-        model.matchDimensions(canvas, displaySize)
-        const detections = await model.detectAllImage(imad).withLandmarks().withDescriptors()
-        const resizeDetecttions = model.resizeResults(detections, displaySize)
-        resizeDetecttions.forEach(detection => {
-            const box = detection.detection.box
-            const drawBox = model.draw.DrawBox(box, {label: 'toto'})
-            drawBox.draw(canvas)
-        })
-
-    })
-}
-
-
-
 run();
-imgs();
 
     
