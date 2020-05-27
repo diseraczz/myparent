@@ -8,13 +8,12 @@
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <title>Document</title>
         <script defer src="script.js"></script> 
-
-        
     </head>
     <body>
-        <div id="output" style="position:absolute;top:440; font-family:courier;font-size:24px;height:300px"></div>
+        <input type="file" accept="image" onchange="loadFile(event)">
+        <img id="outputs" style="position:absolute;top:50%;left:52%;width:320;height:320;display:none;">
+        <button id="detect" onclick="dett()" class="button">detect</button>
         <canvas id="canvas" width="1500" height="1500r" style="position:absolute;top:100;left:100;border:0px solid;"></canvas>
-        <img id="salad5" crossorigin="anonymous" src="/new/sea.jpg" style="position:absolute;top:50%;left:52%;width:320;height:320;display:none;">
-        <img id="salad" crossorigin="anonymous" src="https://storage.googleapis.com/tfjs-testing/tfjs-automl/object_detection/test_image.jpg" style="position:absolute;top:50%;left:52%;width:320;height:320;display:none;">
+        <img id="salad" crossorigin="anonymous" src="/new/messa.jpg" style="position:absolute;top:50%;left:52%;width:320;height:320;display:none;">
     </body>
 </html>
